@@ -48,7 +48,7 @@ int main(int argc, char **argv){
 	al_draw_text(font1, al_map_rgb(255, 255, 255), 640, 650,ALLEGRO_ALIGN_CENTRE,"ABOUT");
 	al_draw_text(font2, al_map_rgb(255, 255, 255), 640, 600, ALLEGRO_ALIGN_CENTRE, "CONTROLS");
 	al_draw_text(font3, al_map_rgb(255, 255, 255), 640, 550, ALLEGRO_ALIGN_CENTRE, "START GAME");
-
+	al_draw_text(font3, al_map_rgb(255, 255, 255), 200, 150, ALLEGRO_ALIGN_CENTRE, " we love");
 		ALLEGRO_BITMAP  *image = NULL;
 
 		if (!al_init_image_addon()) {
