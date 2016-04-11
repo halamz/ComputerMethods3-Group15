@@ -25,7 +25,6 @@ int main(int argc, char **argv){
 	ALLEGRO_FONT *font1 = al_load_ttf_font("ArcadeClassic.ttf", 45, 0);
 	ALLEGRO_FONT *font2 = al_load_ttf_font("ArcadeClassic.ttf", 45, 0);
 	ALLEGRO_FONT *font3 = al_load_ttf_font("ArcadeClassic.ttf", 45, 0);
-	ALLEGRO_FONT *font4 = al_load_ttf_font("ArcadeClassic.ttf", 45, 0);
 	
 	if (!font){
 		return -1;
@@ -43,10 +42,6 @@ int main(int argc, char **argv){
 		return -1;
 	}
 
-	if (!font4){
-		return -1;
-	}
-
 
     al_clear_to_color(al_map_rgb(0, 0, 0)); //background colour 
 
@@ -54,7 +49,6 @@ int main(int argc, char **argv){
 	al_draw_text(font1, al_map_rgb(255, 255, 255), 640, 650,ALLEGRO_ALIGN_CENTRE,"ABOUT");
 	al_draw_text(font2, al_map_rgb(255, 255, 255), 640, 600, ALLEGRO_ALIGN_CENTRE, "CONTROLS");
 	al_draw_text(font3, al_map_rgb(255, 255, 255), 640, 550, ALLEGRO_ALIGN_CENTRE, "START GAME");
-	al_draw_text(font4, al_map_rgb(255, 255, 255), 640, 500, ALLEGRO_ALIGN_CENTRE, "WARREN");
 
 		ALLEGRO_BITMAP  *image = NULL;
 
