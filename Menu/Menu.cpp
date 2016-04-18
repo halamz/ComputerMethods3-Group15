@@ -4,9 +4,11 @@
 #include <allegro5/allegro_ttf.h>
 #include "allegro5/allegro_image.h"
 #include "allegro5/allegro_native_dialog.h"
-
+#include "Player.h"
 
 int main(int argc, char **argv){
+
+	Player pacman;
 
 	if (!al_init()){
 		return -1;
@@ -16,7 +18,7 @@ int main(int argc, char **argv){
 	al_init_ttf_addon();// initialize the ttf (True Type Font) addon
 
 	ALLEGRO_DISPLAY *display = al_create_display(1200, 720);
-
+	al_set_window_position(display, 0, 0);
 	if (!display){
 		return -1;
 	}
@@ -67,7 +69,9 @@ int main(int argc, char **argv){
 		al_draw_bitmap(image, 420,300, 0);
 
 		al_flip_display();
-		al_rest(10);
+		
+	
+		pacman.showPlayer();
 
 		al_destroy_display(display);
 		al_destroy_bitmap(image);

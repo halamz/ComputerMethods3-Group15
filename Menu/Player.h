@@ -2,6 +2,7 @@
 #include <allegro5\allegro.h>
 #include <allegro5\allegro_primitives.h>
 #include <iostream>
+enum KEYS{ DOWN, UP, RIGHT, LEFT };
 
 class Player
 {
@@ -25,6 +26,7 @@ public:
 	int getScore();
 	int getLives();
 
+	void showPlayer();
 	~Player();		//defualt destructor
 };
 
