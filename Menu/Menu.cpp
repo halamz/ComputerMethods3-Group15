@@ -19,6 +19,7 @@ int main(int argc, char **argv){
 
 	ALLEGRO_DISPLAY *display = al_create_display(1200, 720);
 	al_set_window_position(display, 0, 0);
+
 	if (!display){
 		return -1;
 	}
@@ -70,7 +71,7 @@ int main(int argc, char **argv){
 
 		al_flip_display();
 		
-	
+		
 		pacman.showPlayer();
 
 		al_destroy_display(display);
