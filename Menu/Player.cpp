@@ -11,6 +11,42 @@ Player::Player()
 	lives = 3;		//set the player' lives to maximum
 }
 
+void Player::setScore(int newscore)
+{
+	score += newscore;
+}
+
+void Player::setLives()
+{
+	if (lives == 1)
+	{
+		lives = 3; // end of game reset lives
+		// -----code for call killplayer
+	}
+	else
+		lives -= 1;
+}
+
+void Player::setPosx(int x)
+{
+	if (pos_x != 1200 && pos_x != 100)
+		pos_x += x;
+	if (pos_x == 1200)
+		pos_x -= x;
+	if (pos_x == 100)
+		pos_x -= x;
+}
+
+void Player::setPosy(int y)
+{
+	if (pos_y != 700 && pos_y != 100)
+		pos_y += y;
+	if (pos_y == 700)
+		pos_y -= y;
+	if (pos_y == 100)
+		pos_y -= y;
+}
+
 
 Player::~Player()
 {

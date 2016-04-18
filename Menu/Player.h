@@ -13,7 +13,11 @@ private:
 	int lives;		//keep track of the player's live count
 public:
 	Player();		//default constructor
-
+	//mutator methods
+	void setPosx(int );		//method to set position x
+	void setPosy(int );		//method to set position y
+	void setScore(int);		//method to set the score
+	void setLives();			//method to set the lives
 	~Player();		//defualt destructor
 };
 
