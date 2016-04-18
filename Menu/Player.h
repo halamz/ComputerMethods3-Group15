@@ -17,7 +17,14 @@ public:
 	void setPosx(int );		//method to set position x
 	void setPosy(int );		//method to set position y
 	void setScore(int);		//method to set the score
-	void setLives();			//method to set the lives
+	void setLives();		//method to set the lives
+
+	//acessor methods
+	int getPosx();
+	int getPosy();
+	int getScore();
+	int getLives();
+
 	~Player();		//defualt destructor
 };
 

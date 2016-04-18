@@ -47,6 +47,25 @@ void Player::setPosy(int y)
 		pos_y -= y;
 }
 
+int Player::getPosx()
+{
+	return pos_x;
+}
+
+int Player::getPosy()
+{
+	return pos_y;
+}
+
+int Player::getScore()
+{
+	return score;
+}
+
+int Player::getLives()
+{
+	return lives;
+}
 
 Player::~Player()
 {
