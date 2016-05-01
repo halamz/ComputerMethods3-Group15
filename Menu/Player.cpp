@@ -50,32 +50,44 @@ void Player::setLives()
 
 void Player::setPosx(int x)
 {
-	if (path[(pos_x - 140) / 40][(pos_y - 140) / 40] != 2)
+	if (pos_x < 1140 && pos_x > 100)
 	{
-		if (pos_x < 1140 && pos_x > 100)
-			pos_x += x;
-		if (pos_x == 1140)
-			pos_x -= x;
-		if (pos_x == 100)
-			pos_x -= x;
-	}
-	else
 		pos_x += x;
+		if (path[(pos_y - 140) / 80][(pos_x - 140) / 80] == 2)
+		{
+			if (x > 0)
+				pos_x -= (2 * x);
+			else
+				pos_x -= x;
+		}
+	}
+			
+		if (pos_x == 1140)
+			pos_x -= (x);
+		else if (pos_x == 100)
+			pos_x -= x;
 }
-
 void Player::setPosy(int y)
 {
-	if (path[(pos_x - 140) / 40][(pos_y - 140) / 40] != 2)
+	
+	if (pos_y < 700 && pos_y > 100)
 	{
-		if (pos_y < 660 && pos_y > 100)
-			pos_y += y;
-		if (pos_y == 660)
-			pos_y -= y;
-		if (pos_y == 100)
-			pos_y -= y;
-	}
-	else
 		pos_y += y;
+		if (path[(pos_y - 140) / 80][(pos_x - 140) / 80] == 2)
+		{
+			if (y > 0)
+				pos_y -= (2 * y);
+			else
+				pos_y -= y;
+		}
+	}
+		
+		if (pos_y == 700)
+			pos_y -= y;
+		else if (pos_y == 100)
+			pos_y -= y;
+		
+
 }
 
 //Accessor methods
@@ -108,7 +120,12 @@ void Player::diplayScore()
 	ALLEGRO_FONT *font3 = al_load_ttf_font("ArcadeClassic.ttf", 45, 0);
 	std::string sc = "score " + std::to_string(score);
 	
-	al_draw_text(font3, al_map_rgb(255, 255, 0), 400, 30, ALLEGRO_ALIGN_CENTRE, sc.c_str());
+	al_draw_text(font3, al_map_rgb(255, 255, 0), 200, 30, ALLEGRO_ALIGN_CENTRE, sc.c_str());
+
+	std::string x = "x  " + std::to_string(pos_x);
+	al_draw_text(font3, al_map_rgb(255, 255, 0), 400, 30, ALLEGRO_ALIGN_CENTRE, x.c_str());
+	std::string y = "y  " + std::to_string(pos_y);
+	al_draw_text(font3, al_map_rgb(255, 255, 0), 600, 30, ALLEGRO_ALIGN_CENTRE, y.c_str());
 
 }
 
