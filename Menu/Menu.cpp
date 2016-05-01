@@ -1,10 +1,14 @@
 #include <stdio.h>
+#include <iostream>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
 #include "allegro5/allegro_image.h"
 #include "allegro5/allegro_native_dialog.h"
 #include "Player.h"
+#include "background.h"
+
+using namespace std;
 
 int main(int argc, char **argv){
 
@@ -47,8 +51,10 @@ int main(int argc, char **argv){
 
 
     al_clear_to_color(al_map_rgb(0, 0, 0)); //background colour 
+	string name = "score";
 
 	al_draw_text(font, al_map_rgb(255, 255, 0), 640, 120, ALLEGRO_ALIGN_CENTRE, "PACMAN");
+	al_draw_text(font1, al_map_rgb(255, 255, 0), 400, 30, ALLEGRO_ALIGN_CENTRE, name.c_str());
 	al_draw_text(font1, al_map_rgb(255, 255, 255), 640, 650,ALLEGRO_ALIGN_CENTRE,"ABOUT");
 	al_draw_text(font2, al_map_rgb(255, 255, 255), 640, 600, ALLEGRO_ALIGN_CENTRE, "CONTROLS");
 	al_draw_text(font3, al_map_rgb(255, 255, 255), 640, 550, ALLEGRO_ALIGN_CENTRE, "START GAME");

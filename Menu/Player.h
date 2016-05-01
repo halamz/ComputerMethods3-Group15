@@ -1,7 +1,14 @@
 #pragma once
-#include <allegro5\allegro.h>
-#include <allegro5\allegro_primitives.h>
+#include <stdio.h>
 #include <iostream>
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
+#include "allegro5/allegro_image.h"
+#include "allegro5/allegro_native_dialog.h"
+#include <string>
+using namespace std;
+
 enum KEYS{ DOWN, UP, RIGHT, LEFT };
 
 class Player
@@ -27,6 +34,7 @@ public:
 	int getScore();
 	int getLives();
 
+	void diplayScore();
 	void setPath();
 	void showPlayer();
 	~Player();		//defualt destructor

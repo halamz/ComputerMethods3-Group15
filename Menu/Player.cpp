@@ -50,22 +50,32 @@ void Player::setLives()
 
 void Player::setPosx(int x)
 {
-	if (pos_x < 1140 && pos_x > 100)
+	if (path[(pos_x - 140) / 40][(pos_y - 140) / 40] != 2)
+	{
+		if (pos_x < 1140 && pos_x > 100)
+			pos_x += x;
+		if (pos_x == 1140)
+			pos_x -= x;
+		if (pos_x == 100)
+			pos_x -= x;
+	}
+	else
 		pos_x += x;
-	if (pos_x == 1140)
-		pos_x -= x;
-	if (pos_x == 100)
-		pos_x -= x; 
 }
 
 void Player::setPosy(int y)
 {
-	if (pos_y < 660 && pos_y > 100)
+	if (path[(pos_x - 140) / 40][(pos_y - 140) / 40] != 2)
+	{
+		if (pos_y < 660 && pos_y > 100)
+			pos_y += y;
+		if (pos_y == 660)
+			pos_y -= y;
+		if (pos_y == 100)
+			pos_y -= y;
+	}
+	else
 		pos_y += y;
-	if (pos_y == 660)
-		pos_y -= y;
-	if (pos_y == 100)
-		pos_y -= y; 
 }
 
 //Accessor methods
@@ -88,6 +98,18 @@ int Player::getScore()
 int Player::getLives()
 {
 	return lives;
+}
+
+void Player::diplayScore()
+{
+	al_init_font_addon(); // initialize the font addon
+	al_init_ttf_addon();// initialize the ttf (True Type Font) addon
+
+	ALLEGRO_FONT *font3 = al_load_ttf_font("ArcadeClassic.ttf", 45, 0);
+	std::string sc = "score " + std::to_string(score);
+	
+	al_draw_text(font3, al_map_rgb(255, 255, 0), 400, 30, ALLEGRO_ALIGN_CENTRE, sc.c_str());
+
 }
 
 void Player::showPlayer()
@@ -197,11 +219,13 @@ void Player::showPlayer()
 			for (int j = 0; j <= 6; j++)
 			{
 				if (path[j][i] == 1 && pos_x == 140 + (i * 80) && pos_y == 140 + (j * 80))
+				{
 					path[j][i] = 0;
-				setScore(10);
+					setScore(10);
+				}
 			}
 		}
-
+		diplayScore();
 		al_flip_display();		//flips the display screen
 		al_clear_to_color(al_map_rgb(0, 0, 0));		//clears the diplay screen to black
 
