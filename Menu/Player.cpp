@@ -1,16 +1,37 @@
 #include "Player.h"
-
+#include "background.h"
 
 Player::Player()
 {
 
-	pos_x = 600;		//set player's initial x position
-	pos_y = 500;		//set the player's initial y position
-	pos_r = 10;		//set the player's radius
+	pos_x = 140;		//set player's initial x position
+	pos_y = 140;		//set the player's initial y position
+	pos_r = 40;		//set the player's radius
 	score = 0;		//set the player's initial score to 0
 	lives = 3;		//set the player' lives to maximum
+	setPath();
 }
+void Player::setPath()
+{
+	int temp[7][13] = {
+		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+		{ 1, 2, 2, 1, 2, 2, 2, 2, 1, 2, 2, 2, 1 },
+		{ 1, 2, 2, 1, 2, 2, 2, 2, 1, 2, 2, 2, 1 },
+		{ 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1 },
+		{ 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1 },
+		{ 1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 1 },
+		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+	};
+	
+	for (int i = 0; i < 7; i++)
+	{
+		for (int j = 0; j < 13; j++)
+		{
+			path[i][j] = temp[i][j];
+		}
+	}
 
+}
 void Player::setScore(int newscore)
 {
 	score += newscore;
@@ -29,25 +50,22 @@ void Player::setLives()
 
 void Player::setPosx(int x)
 {
-	if (pos_x != 1200 && pos_x != 100)
+	if (pos_x < 1140 && pos_x > 100)
 		pos_x += x;
-	if (pos_x == 1200)
+	if (pos_x == 1140)
 		pos_x -= x;
 	if (pos_x == 100)
 		pos_x -= x; 
-
 }
 
 void Player::setPosy(int y)
 {
-	if (pos_y != 700 && pos_y != 100)
+	if (pos_y < 660 && pos_y > 100)
 		pos_y += y;
-	if (pos_y == 700)
+	if (pos_y == 660)
 		pos_y -= y;
 	if (pos_y == 100)
 		pos_y -= y; 
-
-
 }
 
 //Accessor methods
@@ -75,7 +93,7 @@ int Player::getLives()
 void Player::showPlayer()
 {
 	bool done = false;
-
+	background back;
 	bool keys[4] = { false, false, false, false };
 
 	ALLEGRO_EVENT_QUEUE *event_queue = NULL;
@@ -93,6 +111,16 @@ void Player::showPlayer()
 
 		al_wait_for_event(event_queue, &ev); //allegro waits for something to happend
 
+		//creates the food
+		for (int i = 0; i <= 12; i++)
+		{
+			for (int j = 0; j <= 6; j++)
+			{
+				if (path[j][i] == 1)
+					al_draw_filled_circle(140 + (i * 80), 140 + (j * 80), 10, al_map_rgb(220, 0, 0));
+			}
+		}
+
 		if (ev.type == ALLEGRO_EVENT_KEY_DOWN)
 		{
 			switch (ev.keyboard.keycode)
@@ -109,6 +137,8 @@ void Player::showPlayer()
 			case ALLEGRO_KEY_RIGHT:
 				keys[RIGHT] = true;
 				break;
+			case  ALLEGRO_KEY_ESCAPE:
+				done = true;
 			}
 		}
 		else if (ev.type == ALLEGRO_EVENT_KEY_UP)
@@ -140,7 +170,8 @@ void Player::showPlayer()
 		setPosx(keys[RIGHT] * pos_r);
 
 		al_draw_filled_circle(getPosx(),getPosy(),pos_r, al_map_rgb(255, 255, 0));		//creates the player's face
-
+		back.setBorder();
+		back.setBlocks();
 		// creates the player's mouth depending on the player's movement direction 
 		if (keys[DOWN])
 		{
@@ -158,6 +189,17 @@ void Player::showPlayer()
 		else if (keys[RIGHT])
 		{
 			al_draw_filled_triangle(getPosx(), getPosy(), getPosx() + pos_r, getPosy() + pos_r, getPosx() + pos_r, getPosy() - pos_r, al_map_rgb(0, 0, 0));
+		}
+
+		//removes food 
+		for (int i = 0; i <= 12; i++)
+		{
+			for (int j = 0; j <= 6; j++)
+			{
+				if (path[j][i] == 1 && pos_x == 140 + (i * 80) && pos_y == 140 + (j * 80))
+					path[j][i] = 0;
+				setScore(10);
+			}
 		}
 
 		al_flip_display();		//flips the display screen

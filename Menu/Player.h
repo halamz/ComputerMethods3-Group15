@@ -12,6 +12,7 @@ private:
 	int pos_r;		//keep track of the player's radius
 	int score;		//keep track of the player's score
 	int lives;		//keep track of the player's live count
+	int path[7][13];
 public:
 	Player();		//default constructor
 	//mutator methods
@@ -26,6 +27,7 @@ public:
 	int getScore();
 	int getLives();
 
+	void setPath();
 	void showPlayer();
 	~Player();		//defualt destructor
 };
